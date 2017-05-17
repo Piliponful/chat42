@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
+import MainPage from './components/MainPage';
 
 const App = () => (
-  <h1>React Webpack 2 starter</h1>
+  <div>
+    <MainPage />
+  </div>
 );
 
 render(<App />, document.getElementById('app'));
