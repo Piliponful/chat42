@@ -1,11 +1,17 @@
 $btn-color = #3d83d6
 $btn-font-color = #fff
+$white = #F7F7F7
+$black = #1F1F21
+$green = #4CD964
+$red = #FF3B30
 
 .btn-wrapper
   align-items: center
   display: flex
+  flex-flow: column wrap
   justify-content: center
   height: 100%
+  position: relative
   width: 100%
 
 .btn
@@ -19,10 +25,31 @@ $btn-font-color = #fff
   font-weight: 700
   outline: 0
   padding: 1em 2em
+  &:hover
+    border-bottom-color darken($btn-color, 20)
+  &:active
+    border-bottom-color: transparent
+    border-top-color darken($btn-color, 20)
 
-.btn:hover
-  border-bottom-color darken($btn-color, 20)
+.flash-message
+  border-radius: 2px
+  color: $white
+  font-size: 18px
+  left: 50%
+  line-height: 18px
+  margin: 10px
+  padding: 20px
+  position: absolute
+  top: 0
+  transform: translateX(-50%)
+  transition: opacity .5s ease-in-out
+  width: calc(100% - 100px)
+.flash-message-failure
+  background: $red
+.flash-message-success
+  background: $green
 
-.btn:active
-  border-bottom-color: transparent
-  border-top-color darken($btn-color, 20)
+.material-icons
+  cursor: pointer
+  float: right
+  line-height: 18px

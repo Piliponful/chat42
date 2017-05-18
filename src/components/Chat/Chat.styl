@@ -1,0 +1,74 @@
+$btn-color = #3d83d6
+$btn-font-color = #fff
+$white = #F7F7F7
+$black = #1F1F21
+
+.chat
+  height: 100%
+  width: 100%
+
+.message-board
+  display: flex
+  flex-flow: column wrap
+  overflow-y: scroll
+  width: 100%
+  &::-webkit-scrollbar
+    display: none
+
+.message
+  background-color: $white
+  border-radius: 2px
+  margin-bottom: 20px
+  max-width: 500px
+  min-width: 300px
+  padding: 2em
+  width: 50%
+
+.mine
+  align-self: flex-end
+
+.not-mine
+  align-self: flex-start
+
+.input-group
+  bottom: 0
+  display: flex
+  flex-flow: row nowrap
+  font-size: 1.14em
+  left: 50%
+  margin-bottom: 10px
+  min-width: 300px
+  justify-content: center;
+  padding: 0 8px
+  position: fixed
+  transform: translateX(-50%)
+  width: 50%
+  z-index: 1
+
+.input
+  background-color: rgba(#fff, 0.55)
+  border: 0
+  color: $black
+  flex-grow: 1
+  outline: 0
+  &:focus
+    background-color: rgba(#fff, 0.75)
+  &::-webkit-input-placeholder
+   color: rgba(#212121, 0.25)
+
+.btn
+  background-color: $btn-color
+  border: 0
+  border-bottom: 2px solid transparent
+  border-top: 2px solid transparent
+  color: $btn-font-color
+  cursor: pointer
+  font-size: 1em
+  font-weight: 700
+  outline: 0
+  padding: 1em 2em
+  &:hover
+    border-bottom-color darken($btn-color, 20)
+  &:active
+    border-bottom-color: transparent
+    border-top-color darken($btn-color, 20)

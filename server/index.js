@@ -70,22 +70,35 @@ RoomList.prototype.toString = function () {
 };
 const roomList = new RoomList();
 
-// app.use(express.static(`${__dirname}/../client`));
+app.use(express.static(`${__dirname}/public`));
 
 io.on('connection', socket => {
   let roomId = socket.handshake.query.roomId;
   console.log(`User Connected, roomId: ${roomId}`);
 
-  if (roomList.roomExist(roomId)) {
+  if (roomId && roomList.roomExist(roomId)) {
     const added = roomList.addUserToRoom(socket.id, roomId);
     if (added) {
       socket.join(roomId);
       socket.broadcast.to(roomId).emit('join');
       console.log(`User enter the room. ${roomList}`);
-      return;
+    } else {
+      socket.emit(
+        'tryAnotherRoom',
+        'No one needs you here... This is a cruel world, what did you expect?'
+      );
+      roomId = roomList.addRoom(socket.id);
+      socket.join(roomId);
+      console.log(`New room added, user joined, roomList: ${roomList}`);
+      socket.emit('room', roomId);
     }
-    socket.emit('full');
   } else {
+    if (roomId) {
+      socket.emit(
+        'tryAnotherRoom',
+        'That room does not exist'
+      );
+    }
     roomId = roomList.addRoom(socket.id);
     socket.join(roomId);
     console.log(`New room added, user joined, roomList: ${roomList}`);
@@ -94,7 +107,7 @@ io.on('connection', socket => {
   socket.on('message', msg => socket.broadcast.to(roomId).emit('message', msg));
   socket.on('disconnect', () => {
     roomList.removeUserFromRoom(socket.id, roomId);
-    socket.broadcast.to(roomId).emit('leave');
+    socket.broadcast.to(roomId).emit('tryAnotherRoom', 'Your friend is left the building...');
     console.log(`User Disconnected, roomList: ${roomList}`);
   });
 });
