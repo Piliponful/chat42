@@ -1,9 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import MainPage from './components/MainPage';
+import MainPage from './components/Clipboard';
+
+import './index.styl';
 
 const App = () => (
-  <div>
+  <div style={{ height: '100%' }}>
     <MainPage />
   </div>
 );

@@ -19,11 +19,14 @@
     "npm": "^4.6.1",
     "query-string": "^4.3.4",
     "react": "^15.5.4",
+    "react-copy-to-clipboard": "^5.0.0",
     "react-dom": "^15.5.4",
     "shortid": "^2.2.8",
     "socket.io": "^2.0.1",
     "socket.io-client": "^2.0.1",
     "style-loader": "^0.17.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "webpack": "^2.5.1",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.4.5"
@@ -37,6 +40,6 @@
   },
   "scripts": {
     "client": "webpack-dashboard -- webpack-dev-server --config webpack.config.js",
-    "server": "nodemon server/index.js"
+    "server": "nodemon --watch server server/index.js"
   }
 }

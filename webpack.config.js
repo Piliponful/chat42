@@ -14,7 +14,7 @@ module.exports = {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
-        test: /\.css$/,
+        test: /\.styl$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
@@ -26,6 +26,7 @@ module.exports = {
               localIdentName: '[name]__[local]__[hash:base64:6]',
             },
           },
+          'stylus-loader',
         ],
       },
     ],

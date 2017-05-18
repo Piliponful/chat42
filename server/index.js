@@ -76,21 +76,25 @@ io.on('connection', socket => {
   let roomId = socket.handshake.query.roomId;
   console.log(`User Connected, roomId: ${roomId}`);
 
-  if (!roomList.roomExist(roomId)) {
-    roomId = roomList.addRoom(socket.id);
-    console.log(`New room added, roomList: ${roomList}`);
-    socket.emit('room', roomId);
-  } else {
+  if (roomList.roomExist(roomId)) {
     const added = roomList.addUserToRoom(socket.id, roomId);
-    if (!added) {
-      socket.emit('full');
-      socket.disconnect();
+    if (added) {
+      socket.join(roomId);
+      socket.broadcast.to(roomId).emit('join');
+      console.log(`User enter the room. ${roomList}`);
+      return;
     }
-    console.log(`User enter the room. ${roomList}`);
+    socket.emit('full');
+  } else {
+    roomId = roomList.addRoom(socket.id);
+    socket.join(roomId);
+    console.log(`New room added, user joined, roomList: ${roomList}`);
+    socket.emit('room', roomId);
   }
   socket.on('message', msg => socket.broadcast.to(roomId).emit('message', msg));
   socket.on('disconnect', () => {
     roomList.removeUserFromRoom(socket.id, roomId);
+    socket.broadcast.to(roomId).emit('leave');
     console.log(`User Disconnected, roomList: ${roomList}`);
   });
 });
