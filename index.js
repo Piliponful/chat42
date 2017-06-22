@@ -70,7 +70,7 @@ RoomList.prototype.toString = function () {
 };
 const roomList = new RoomList();
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/client/public`));
 
 io.on('connection', socket => {
   let roomId = socket.handshake.query.roomId;
@@ -113,5 +113,5 @@ io.on('connection', socket => {
 });
 
 server.listen(port, () => {
-  console.log(`[INFO] Listening on port: ${port}`);
+  console.log(`[INFO] Server is running on: http://localhost:${port}`);
 });

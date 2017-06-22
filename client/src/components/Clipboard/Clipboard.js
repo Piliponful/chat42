@@ -116,4 +116,4 @@ const Clipboard = ({ link, copyHandler }) => (
   >
     <button className={styles.btn}>Copy link</button>
   </CopyToClipboard>
-)
+);

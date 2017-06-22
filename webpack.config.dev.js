@@ -1,13 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
-const srcDir = path.resolve(__dirname, 'src');
+const srcDir = path.resolve(__dirname, 'client/src');
 
 module.exports = {
+  devtool: 'source-map',
   entry: `${srcDir}/index.js`,
   output: {
-    path: path.resolve(__dirname, 'server/public'),
+    path: path.resolve(__dirname, 'client/public'),
     filename: 'bundle.js',
   },
   module: {
@@ -32,7 +34,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ template: 'client/src/index.html' }),
+    new DashboardPlugin(),
     new webpack.DefinePlugin({
       'process.env.HOST': JSON.stringify(process.env.HOST || 'http://localhost:3000/'),
     }),

@@ -40,9 +40,12 @@
     "webpack-dev-server": "^2.4.5"
   },
   "scripts": {
-    "start": "node ./server/index.js",
-    "build": "HOST='https://chat42.now.sh' webpack -p --config webpack.config.dev.js",
-    "client": "webpack-dashboard -- webpack-dev-server --config webpack.config.js",
-    "server": "nodemon --watch server server/index.js"
+    "build": "webpack -p --config webpack.config.prod.js",
+
+    "dev_front": "webpack-dashboard -- webpack -w --config webpack.config.dev.js",
+    "dev_back": "nodemon index",
+
+    "prestart": "yarn build",
+    "start": "node index"
   }
 }
