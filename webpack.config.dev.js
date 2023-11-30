@@ -1,16 +1,16 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const srcDir = path.resolve(__dirname, 'client/src');
+const srcDir = path.resolve(__dirname, 'client/src')
 
 module.exports = {
   devtool: 'source-map',
+  mode: 'development',
   entry: `${srcDir}/index.js`,
   output: {
     path: path.resolve(__dirname, 'client/public'),
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -23,21 +23,18 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              camelCase: true,
-              localIdentName: '[name]__[local]__[hash:base64:6]',
-            },
+              modules: { localIdentName: '[name]__[local]__[hash:base64:6]', exportLocalsConvention: 'camelCase' }
+            }
           },
-          'stylus-loader',
-        ],
-      },
-    ],
+          'stylus-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({ template: 'client/src/index.html' }),
-    new DashboardPlugin(),
     new webpack.DefinePlugin({
-      'process.env.HOST': JSON.stringify(process.env.HOST || 'http://localhost:3000/'),
-    }),
-  ],
-};
+      'process.env.HOST': JSON.stringify(process.env.HOST || 'http://localhost:3000/')
+    })
+  ]
+}

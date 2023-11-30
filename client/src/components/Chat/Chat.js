@@ -1,37 +1,39 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, { Component } from 'react'
+import classNames from 'classnames'
 
-import styles from './Chat.styl';
+import styles from './Chat.styl'
 
 export default class Chat extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       value: '',
-      messages: [],
-    };
+      messages: []
+    }
     props.socket.on('message', text => this.setState({
       ...this.state,
       messages: [
         ...this.state.messages,
-        { text, mine: false },
-      ],
-    }));
-    this.sendMessage = this.sendMessage.bind(this);
+        { text, mine: false }
+      ]
+    }))
+    this.sendMessage = this.sendMessage.bind(this)
   }
-  sendMessage() {
-    const text = this.state.value;
-    this.props.socket.emit('message', text);
+
+  sendMessage () {
+    const text = this.state.value
+    this.props.socket.emit('message', text)
     this.setState({
       ...this.state,
       value: '',
       messages: [
         ...this.state.messages,
-        { text, mine: true },
-      ],
-    });
+        { text, mine: true }
+      ]
+    })
   }
-  render() {
+
+  render () {
     return (
       <div className={styles.chat}>
         <div className={styles.messageBoard}>
@@ -44,14 +46,14 @@ export default class Chat extends Component {
                       styles.message,
                       {
                         [styles.mine]: msg.mine,
-                        [styles.notMine]: !msg.mine,
-                      },
+                        [styles.notMine]: !msg.mine
+                      }
                     )
                   }
                 >
                   {msg.text}
                 </div>
-              ),
+              )
             )
           }
         </div>
@@ -69,6 +71,6 @@ export default class Chat extends Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
