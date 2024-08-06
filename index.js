@@ -1,6 +1,6 @@
 const express = require('express')
 const http = require('http')
-const SocketIO = require('socket.io')
+const { Server: SocketIO } = require('socket.io')
 const shortid = require('shortid')
 
 const app = express()

@@ -119,6 +119,6 @@ const Clipboard = ({ link, copyHandler }) => (
     text={link}
     onCopy={copyHandler}
   >
-    <button className={styles.btn}>Copy link</button>
+    <button className={styles.btn} onClick={() => { console.log('link: ', link); navigator.clipboard.writeText(link) }}>Copy link</button>
   </CopyToClipboard>
 )
